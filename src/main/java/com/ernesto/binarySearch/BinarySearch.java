@@ -10,7 +10,7 @@ public class BinarySearch {
     public static void main(String[] args) {
         // int[] nums = new int[30];
 
-        int[] nums = new int[] {1, 2, 2, 2, 3};
+        int[] nums = new int[] {1, 1, 2, 2, 3};
         // int[] nums = new int[] {3, 2, 2, 2, 1};
         int target = 2;
         /*for (int i = 0, length = nums.length; i < length; i++) {
@@ -20,6 +20,7 @@ public class BinarySearch {
             // System.out.println("nums :" + Arrays.toString(nums));
             // System.out.println(target + " 在 nums 中的位置是：" + binarySearch(nums, target));
             System.out.println(target + " 在 nums 中的最左侧位置是：" + binarySearchOfLeftFirst(nums, target));
+            // System.out.println(target + " 在 nums 中的最左侧位置是：" + binarySearchOfLeftOther(nums, target));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -68,10 +69,12 @@ public class BinarySearch {
          */
         int low = 0;
         int high = nums.length;
+        // int high = nums.length - 1;
         if (target > nums[high - 1] || target < nums[low]) {
             return -1;
         }
         while (low < high) {
+            // while (low < high - 1) {
             int middle = (low + high) / 2;
             if (nums[middle] == target) {
                 high = middle;
@@ -83,4 +86,36 @@ public class BinarySearch {
         }
         return low;
     }
+
+    /**
+     * 二分查找方法 Java 实现
+     * ①假定目标数组中含有不唯一的 target 目标值
+     * ②查找区间为闭区间 [low,high] 错误的方案，查找区间为 [low,high]，那么在判定
+     * 跳出死循环的条件是：low = high + 1,由于查找最左侧的目标数值，则查找过程是 high
+     * 在 nums[middle] = target 的时候一直往 low 方向移动，导致 high = low -1 low
+     * 最小是 0 则 high = -1
+     * ③查找最左侧的符合条件的目标值
+     *
+     * @param nums
+     * @param target
+     * @return
+     */
+    // public static final int binarySearchOfLeftOther(int[] nums, int target) {
+    //     if (nums == null || nums.length == 0) {
+    //         return -1;
+    //     }
+    //     int low = 0;
+    //     int high = nums.length - 1;
+    //     while (low <= high) {
+    //         int middle = low + (high - low) >> 1;
+    //         if (target < nums[middle]) {
+    //             high = middle - 1;
+    //         } else if (target > nums[middle]) {
+    //             low = middle + 1;
+    //         } else {
+    //             high = middle - 1;
+    //         }
+    //     }
+    //     return low;
+    // }
 }
