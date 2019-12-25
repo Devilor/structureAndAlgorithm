@@ -19,8 +19,9 @@ public class BinarySearch {
         try {
             // System.out.println("nums :" + Arrays.toString(nums));
             // System.out.println(target + " 在 nums 中的位置是：" + binarySearch(nums, target));
-            System.out.println(target + " 在 nums 中的最左侧位置是：" + binarySearchOfLeftFirst(nums, target));
+            // System.out.println(target + " 在 nums 中的最左侧位置是：" + binarySearchOfLeftFirst(nums, target));
             // System.out.println(target + " 在 nums 中的最左侧位置是：" + binarySearchOfLeftOther(nums, target));
+            System.out.println(target + " 在 nums 中的最右侧位置是：" + binarySearchOfRight(nums, target));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -58,7 +59,7 @@ public class BinarySearch {
     public final static int binarySearchOfLeftFirst(int[] nums, int target) {
         /**因为需要找到最左侧符合要求的数字索引，所以我们的思路是尽可能的使 high 指针往左移
          * 当 high = nums.length 的时候 二分查找的区间总会是：[low,high)
-         * 由基本的二分查找分析可以知悉：第一个找到的值总回事 middle 索引位置处的数字，所以
+         * 由基本的二分查找分析可以知悉：第一个找到的值总会是 middle 索引位置处的数字，所以
          * 当 middle 位置的数字检测之后，总会在 [low,middle) 或者 [middle + 1,high)
          * 区间内查找，之所以能够找到最左侧符合条件的索引，是因为当检测到 middle 位置的数字符合
          * 条件的时候不要马上返回，而是继续缩小查找区间，确切的说是 high 往 low 方向移动，直到
@@ -81,7 +82,7 @@ public class BinarySearch {
             } else if (nums[middle] < target) {
                 low = middle + 1;
             } else if (nums[middle] > target) {
-                high = middle; // 注意
+                high = middle;
             }
         }
         return low;
@@ -118,4 +119,23 @@ public class BinarySearch {
     //     }
     //     return low;
     // }
+    public static final int binarySearchOfRight(int[] nums, int target) {
+        if (nums == null || nums.length == 0) {
+            return -1;
+        }
+        int low = 0;
+        int high = nums.length;
+        while (low < high) {
+            int middle = low + ((high - low) >> 1);
+            if (target < nums[middle]) {
+                high = middle;
+            } else if (target > nums[middle]) {
+                low = middle + 1;
+            } else {
+                low = middle + 1;//这里的条件要和 while(low < high) 保持一致，毕竟最后都是带入到这里校验
+            }
+        }
+        return low - 1;//因为二分查找最终的查找方式是 nums[middle] 判断，所以不管怎变形都是这个条件，middle = low + 1
+        //所以最后返回 low - 1 其实就是返回的 nums[middle] 的索引
+    }
 }
