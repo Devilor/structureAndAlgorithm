@@ -8,14 +8,18 @@ import java.util.Arrays;
  */
 public class BinarySearch {
     public static void main(String[] args) {
-        int[] nums = new int[30];
-        int target = 13;
-        for (int i = 0, length = nums.length; i < length; i++) {
+        // int[] nums = new int[30];
+
+        int[] nums = new int[] {1, 2, 2, 2, 3};
+        // int[] nums = new int[] {3, 2, 2, 2, 1};
+        int target = 2;
+        /*for (int i = 0, length = nums.length; i < length; i++) {
             nums[i] = i + 1;
-        }
+        }*/
         try {
-            System.out.println("nums :" + Arrays.toString(nums));
-            System.out.println(target + " 在 nums 中的位置是：" + binarySearch(nums, target));
+            // System.out.println("nums :" + Arrays.toString(nums));
+            // System.out.println(target + " 在 nums 中的位置是：" + binarySearch(nums, target));
+            System.out.println(target + " 在 nums 中的最左侧位置是：" + binarySearchOfLeftFirst(nums, target));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -48,5 +52,35 @@ public class BinarySearch {
             }
         }
         return -1;
+    }
+
+    public final static int binarySearchOfLeftFirst(int[] nums, int target) {
+        /**因为需要找到最左侧符合要求的数字索引，所以我们的思路是尽可能的使 high 指针往左移
+         * 当 high = nums.length 的时候 二分查找的区间总会是：[low,high)
+         * 由基本的二分查找分析可以知悉：第一个找到的值总回事 middle 索引位置处的数字，所以
+         * 当 middle 位置的数字检测之后，总会在 [low,middle) 或者 [middle + 1,high)
+         * 区间内查找，之所以能够找到最左侧符合条件的索引，是因为当检测到 middle 位置的数字符合
+         * 条件的时候不要马上返回，而是继续缩小查找区间，确切的说是 high 往 low 方向移动，直到
+         * high == low 即 查找到最左边符合条件的一个元素。（如果数组中存在需要查找的元素，那么
+         * high 最后停留的位置的数字一定是最后要找的数字，因为数组是有序-升序排好的）
+         * [3,2,2,2,1]
+         *  l h
+         */
+        int low = 0;
+        int high = nums.length;
+        if (target > nums[high - 1] || target < nums[low]) {
+            return -1;
+        }
+        while (low < high) {
+            int middle = (low + high) / 2;
+            if (nums[middle] == target) {
+                high = middle;
+            } else if (nums[middle] < target) {
+                low = middle + 1;
+            } else if (nums[middle] > target) {
+                high = middle; // 注意
+            }
+        }
+        return low;
     }
 }
