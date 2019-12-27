@@ -35,6 +35,10 @@ public class EStackByLinked<T> {
     public void push(T item) {
         Node oldHead = head;
         head = new Node();
+        /**
+         * 因为将添加的数据直接放在了待插入头部的 Node 中（新建 Node 的 data 位置）
+         * 所以第一个头结点（最后会变成尾部节点）总是为 null
+         */
         head.next = oldHead;
         head.data = item;
         size++;
