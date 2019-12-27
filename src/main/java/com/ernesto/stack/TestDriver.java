@@ -8,6 +8,11 @@ import java.util.Iterator;
  */
 public class TestDriver {
     public static void main(String[] args) {
+        //testStackByArray();
+        testStackByLinked();
+    }
+
+    public static void testStackByArray() {
         EStack<String> stack = new EStack<String>(4);
         stack.push("1");
         stack.push("2");
@@ -25,6 +30,21 @@ public class TestDriver {
         Iterator<String> iterator = stack.iterator();
         while (iterator.hasNext()) {
             System.out.print(String.format("item - {%s}\n", iterator.next()));
+        }
+    }
+
+    public static void testStackByLinked() {
+        EStackByLinked<String> stack = new EStackByLinked<String>();
+        stack.push("1");
+        stack.push("2");
+        stack.push("3");
+        stack.push("4");
+        stack.push("5");
+        stack.push("6");
+
+        Iterator<String> iterator = stack.iterator();
+        while (iterator.hasNext()) {
+            System.out.printf("item - {%s}\n",iterator.next());
         }
     }
 }
