@@ -1,5 +1,7 @@
 package com.ernesto.stack;
 
+import java.util.Iterator;
+
 /**
  * 利用数组模仿一个 stack
  *
@@ -101,5 +103,34 @@ public class EStack<T> {
             this.resize(size / 2);
         }
         return item;
+    }
+
+    /**
+     * 内置迭代器
+     */
+    private class EStackIterator implements Iterator<T> {
+
+        private int i = size;
+
+        public boolean hasNext() {
+            return i > 0;
+        }
+
+        public T next() {
+            return EStack.this.data[--i];
+        }
+
+        public void remove() {
+            System.out.println("暂时不支持该操作！");
+        }
+    }
+
+    /**
+     * 返回内部迭代器
+     *
+     * @return
+     */
+    public Iterator<T> iterator() {
+        return new EStackIterator();
     }
 }
