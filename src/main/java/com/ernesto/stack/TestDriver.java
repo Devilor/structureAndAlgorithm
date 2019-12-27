@@ -1,6 +1,5 @@
 package com.ernesto.stack;
 
-import java.util.Arrays;
 import java.util.Iterator;
 
 /**
@@ -25,7 +24,7 @@ public class TestDriver {
         //System.out.println(Arrays.toString(stack.getData()));
         Iterator<String> iterator = stack.iterator();
         while (iterator.hasNext()) {
-            System.out.print(String.format("item - {%s}\n",iterator.next()));
+            System.out.print(String.format("item - {%s}\n", iterator.next()));
         }
     }
 }
