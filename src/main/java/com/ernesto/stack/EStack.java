@@ -1,6 +1,8 @@
 package com.ernesto.stack;
 
 /**
+ * 利用数组模仿一个 stack
+ *
  * @author Ernesto
  * @date 2019/12/26
  */
@@ -70,7 +72,7 @@ public class EStack<T> {
     public void push(T item) {
         //是否已满①扩容②抛出异常
         if (isFull()) {
-            //① 手动抛出异常
+            //① 手动抛出异常（相对简单一点）
             //throw new RuntimeException("栈空间已满！");
             //② 自动扩容
             this.resize(size * 2);
@@ -78,12 +80,23 @@ public class EStack<T> {
         this.data[size++] = item;
     }
 
+    /**
+     * 弹出栈顶元素（后进先出原则）
+     *
+     * @return
+     */
     public T pop() {
         if (isEmpty()) {
             return null;
         }
         T item = this.data[--size];
+        //及时回收游离对象的内存
         this.data[size] = null;
+        /**
+         * 在弹出栈顶元素的时候，如果正好是当前数组的四分之一
+         * 则缩小数组为原来的二分之一保证使用率不会低于四分之一
+         *
+         */
         if (size > 0 && size == this.data.length / 4) {
             this.resize(size / 2);
         }

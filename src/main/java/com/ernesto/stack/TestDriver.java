@@ -20,7 +20,7 @@ public class TestDriver {
         stack.push("9");
         stack.push("10");
         System.out.println(Arrays.toString(stack.getData()));
-        stack.pop();
+        System.out.println(stack.pop());
         System.out.println(Arrays.toString(stack.getData()));
     }
 }
