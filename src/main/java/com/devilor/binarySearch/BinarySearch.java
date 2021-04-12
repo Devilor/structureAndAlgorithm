@@ -1,6 +1,4 @@
-package com.ernesto.binarySearch;
-
-import java.util.Arrays;
+package com.devilor.binarySearch;
 
 /**
  * @author Ernesto
