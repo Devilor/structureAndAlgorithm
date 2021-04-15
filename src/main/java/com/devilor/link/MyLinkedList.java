@@ -131,8 +131,7 @@ public class MyLinkedList<T> {
 		StringBuilder stringBuilder = new StringBuilder();
 		ListNode node = this.sentinel.next;
 		for (int index = 0; index < this.size; index++) {
-			stringBuilder.append(">>>>>> index : value ==> ").append(index).append("=====").append(node.data)
-				.append("\n");
+			stringBuilder.append(">>>>>> index : value ==> ").append(index).append("=====").append(node.data).append("\n");
 			node = node.next;
 		}
 		return stringBuilder.toString();
@@ -141,15 +140,15 @@ public class MyLinkedList<T> {
 	public static void main(String[] args) throws Exception {
 		MyLinkedList<String> stringMyLinkedList = new MyLinkedList<>();
 		stringMyLinkedList.addAtIndex(0, "1");
-		stringMyLinkedList.addAtIndex(1, "2");
-		stringMyLinkedList.addAtIndex(2, "3");
-		stringMyLinkedList.addAtIndex(3, "4");
-		stringMyLinkedList.addAtIndex(4, "5");
+		// stringMyLinkedList.addAtIndex(1, "2");
+		// stringMyLinkedList.addAtIndex(2, "3");
+		// stringMyLinkedList.addAtIndex(3, "4");
+		// stringMyLinkedList.addAtIndex(4, "5");
 		String s = stringMyLinkedList.toString();
 		System.out.println(s);
-		String s1 = stringMyLinkedList.get(2);
-		System.out.println("index 2 : value " + s1);
-		String s2 = stringMyLinkedList.deleteAtIndex(2);
+		// String s1 = stringMyLinkedList.get(2);
+		// System.out.println("index 2 : value " + s1);
+		String s2 = stringMyLinkedList.deleteAtIndex(0);
 		System.out.println(stringMyLinkedList.toString());
 	}
 }
